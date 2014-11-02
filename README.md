@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Web Audio Playground
 ==========
 
@@ -16,7 +15,3 @@ Google Chrome.
 
 Alternately, you can simply host the directory structure on a local web server, and load index.html.  
 (The app cannot be run from file:// as XMLHTTPRequest doesn't work.)
-=======
-enghack2014
-===========
->>>>>>> 4de075cba40a58c609671f8c0b9183ed57c7d9c1

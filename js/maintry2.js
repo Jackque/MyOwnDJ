@@ -358,20 +358,6 @@ function onPlayABSource(event) {
 	}
 }
 
-function playDrum1(buffer) {
-  var source = audioContext.createBufferSource(); // creates a sound source
-  source.buffer = buffers[7];                    // tell the source which sound to play
-  source.connect(audioContext.destination);       // connect the source to the context's destination (the speakers)
-  source.start(0);                           // play the source now
-                                             // note: on older systems, may have to use deprecated noteOn(time);
-}
-function playDrum2(buffer) {
-  var source = audioContext.createBufferSource(); // creates a sound source
-  source.buffer = buffers[9];                    // tell the source which sound to play
-  source.connect(audioContext.destination);       // connect the source to the context's destination (the speakers)
-  source.start(0);                           // play the source now
-                                             // note: on older systems, may have to use deprecated noteOn(time);
-}
 function createOscillator() {
 	var osc = createNewModule( "oscillator", false, true );
 	addModuleSlider( osc, "frequency", 440, 0, 8000, 1, "Hz", onUpdateOscillatorFrequency );
@@ -498,7 +484,6 @@ function createAudioBufferSource( buffer ) {
 	play.style.marginTop = "10px";
 	play.alt = "play";
 	play.onclick = onPlayABSource;
-	play.id="Stuff";
 	module.appendChild( play );
 	
 	module = module.parentNode;
@@ -551,15 +536,6 @@ function createAudioBufferSource( buffer ) {
 	opt.appendChild( document.createTextNode("levels.mp3"));
 	sel.appendChild( opt );
 	opt = document.createElement("option");
-	opt.appendChild( document.createTextNode("drum1.mp3"));
-	sel.appendChild( opt );
-	opt = document.createElement("option");
-	opt.appendChild( document.createTextNode("Martin Garrix - Animals"));
-	sel.appendChild( opt );
-	opt = document.createElement("option");
-	opt.appendChild( document.createTextNode("drum2.mp3"));
-	sel.appendChild( opt );
-	opt = document.createElement("option");
 	opt.appendChild( document.createTextNode("  add new..."));
 	sel.appendChild( opt );
 
@@ -569,7 +545,7 @@ function createAudioBufferSource( buffer ) {
 	
 	// Add select element and type options
 	module.buffer = buffer ? buffer : glassBuffer;
-	//module.addEventListener( "keypress", playDrum1, false);
+
 	if (this.event)
 		this.event.preventDefault();
 	return module;
@@ -799,7 +775,6 @@ function initDragDropOfAudioFiles() {
 }
 
 var drumsBuffer,
-	glassBuffer,
     bassBuffer,
     voiceBuffer,
     noiseBuffer,
@@ -807,9 +782,6 @@ var drumsBuffer,
     irHallBuffer,
 	levelsBuffer,
     irDrumRoomBuffer,
-	drum1Buffer,
-	drum2Buffer,
-	animalsBuffer,
     irParkingGarageBuffer;
 
 function startLoadingSounds() {
@@ -900,39 +872,6 @@ function startLoadingSounds() {
 		} );
 	}
 	levelsRequest.send();
-	
-	var drum1Request = new XMLHttpRequest();
-	drum1Request.open("GET", "sounds/drum1.mp3", true);
-	drum1Request.responseType = "arraybuffer";
-	drum1Request.onload = function() {
-	  audioContext.decodeAudioData( drum1Request.response, function(buffer) { 
-	    	drum1Buffer = buffer; 
-	    	buffers[7]= drum1Buffer;
-		} );
-	}
-	drum1Request.send();
-	
-	var animalsRequest = new XMLHttpRequest();
-	animalsRequest.open("GET", "sounds/Martin Garrix - Animals.mp3", true);
-	animalsRequest.responseType = "arraybuffer";
-	animalsRequest.onload = function() {
-	  audioContext.decodeAudioData( animalsRequest.response, function(buffer) { 
-	    	animalsBuffer = buffer; 
-	    	buffers[8]= animalsBuffer;
-		} );
-	}
-	animalsRequest.send();
-	
-	var drum2Request = new XMLHttpRequest();
-	drum2Request.open("GET", "sounds/drum2.mp3", true);
-	drum2Request.responseType = "arraybuffer";
-	drum2Request.onload = function() {
-	  audioContext.decodeAudioData( drum2Request.response, function(buffer) { 
-	    	drum2Buffer = buffer; 
-	    	buffers[9]= drum2Buffer;
-		} );
-	}
-	drum2Request.send();
 }
 
 function setClickHandler( id, handler ) {
@@ -941,26 +880,7 @@ function setClickHandler( id, handler ) {
 	    el.addEventListener( "mousedown", handler, true );
 	}
 }
-function transitionFade(e){
-// Create a gain node.
-	/*e1=e;
-  var gainNode = audioContext.createGain();
-  while (e1 && !e1.classList.contains("module"))
-		e1 = e1.parentNode;
 
-	if ( !e1 )
-		return;
-  e1.buffer = buffers[7];
-  gainNode.gain.value = 0.2;
-  source=audioContext.createBufferSource();
-  // Connect source to gain.
-  source.connect(gainNode);
-  // Connect gain to destination.
-  gainNode.connect(audioContext.destination);*/
-	stopABSource(e);
-	//alert(e1.outputConnections);
-	
-}
 // Initialization function for the page.
 function init() {
     try {
@@ -991,18 +911,6 @@ function init() {
 	createAudioBufferSourceFromMenu();
 //	if (navigator.userAgent.indexOf("Android") != -1)
 //		document.body.style.zoom = "2";
-}
-window.onkeypress=function(e){
-var key=e.keyCode ? e.keyCode : e.which;
-if(key == 119){//W
-	playDrum1();
-	}
-else if(key== 100){//S
-	transitionFade(document.getElementById('Stuff'));
-}
-else if(key== 115){//S
-	playDrum2();
-}
 }
 
 window.addEventListener('load', init, false);
