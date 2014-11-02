@@ -65,7 +65,7 @@ a:hover {
  *	:: Raw elements
  *	-------------------------------------------------------------------------*/
 body {
-	background: url('../img/body-bkg.gif');
+	background: url('../img/body-bkg2.png');
 }
 
 
@@ -192,7 +192,7 @@ body {
 #output {
 	background:
 		url('../img/ico-speaker.png') 50% 50% no-repeat,
-		url('../img/output-bkg.gif') 0 0 repeat;
+		url('../img/side_bkg4.png') 0 0 repeat;
 	border-left: 1px solid #363636;
 	box-shadow: 0 0 3px rgba(0,0,0, .4);
 	bottom: 0;

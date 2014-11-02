@@ -17,9 +17,8 @@ var tempx=50, tempy=150;
 var idX = 0;
 var lastBufferLoaded = null;
 var buffers = new Array();
-var a = new Array();
-var b = new Array();
-var count = 0;
+var a;
+var b; 
 
 function createNewModule( nodeType, input, output ) {
 	var e=document.createElement("div");
@@ -433,7 +432,7 @@ function createGain() {
 	gainNode.gain.value = 1.0;
 	module.audioNode = gainNode;
 	
-	a[a.length] = module;
+	a = module;
 	if (this.event)
 		this.event.preventDefault();
 }
@@ -733,8 +732,7 @@ function createBiquadFilter() {
 	audioNode.Q.value = 1.0;
 	audioNode.gain.value = 1.0;
 	module.audioNode = audioNode;
-	
-	b[b.length] = module;
+	b = module;
 	if (this.event)
 		this.event.preventDefault();
 }
@@ -964,12 +962,13 @@ function transitionFade(e){
   // Connect gain to destination.
   gainNode.connect(audioContext.destination);*/
 	
-	/*while(b.audioNode.gain.value>0)
+	while(a.audioNode.gain.value>0)
 	{
-		b.audioNode.gain.value*= .9;
+		setInterval(function() {alert(a.audioNode.gain.value)}, 300);
+		a.audioNode.gain.value-= .1;
 		
-	}*/
-	a.audioNode.gain.value/=1.1;
+	}
+	//stopABSource(e);
 	//alert(e1.outputConnections);
 	
 }
@@ -1013,30 +1012,19 @@ function init() {
 }
 window.onkeypress=function(e){
 var key=e.keyCode ? e.keyCode : e.which;
+alert(key);
 if(key == 119){//W
 	playDrum1();
 	}
 else if(key== 100){//D
-	a[count].audioNode.gain.value/=1.025;
+	transitionFade(document.getElementById('Stuff'));
 }
-else if(key== 102)
-{
-	a[count].audioNode.gain.value*=1.025;
-	}
 else if(key== 115){//S
 	playDrum2();
 }
 else if(key == 97){//A
-	b[count].audioNode.frequency.value*=1.05;
-}
-else if(key == 103){//G
-	b[count].audioNode.frequency.value/=1.05;
-}
-else if(key == 116){//T
-
-	count++;
-	if(count>a.length-1)
-		count == 0;
+	changeFrequency();
+	
 }
 }
 

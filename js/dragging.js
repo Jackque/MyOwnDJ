@@ -168,7 +168,7 @@ function startDraggingConnector(event) {
 	shape.setAttributeNS(null, "y1", y);
     shape.setAttributeNS(null, "x2", x);
     shape.setAttributeNS(null, "y2", y);
-    shape.setAttributeNS(null, "stroke", "black");
+    shape.setAttributeNS(null, "stroke", "white");
 	shape.setAttributeNS(null, "stroke-width", "5");
 	dragObj.connectorShape=shape;
 
