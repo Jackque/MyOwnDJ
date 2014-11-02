@@ -20,4 +20,7 @@ p:hover {
     cursor:pointer;
     opacity:0.8;
 }
+ul li {
+    font-family: "Comic Sans MS";
+}
 
