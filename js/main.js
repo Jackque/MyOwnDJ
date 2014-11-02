@@ -19,6 +19,7 @@ var lastBufferLoaded = null;
 var buffers = new Array();
 var a = new Array();
 var b = new Array();
+var c = new Array();
 var count = 0;
 
 function createNewModule( nodeType, input, output ) {
@@ -1034,9 +1035,14 @@ else if(key == 103){//G
 }
 else if(key == 116){//T
 
+	if (count == 0)
+		document.getElementById('nameOfSong').innerText = "Animals";
+	else
+		document.getElementById('nameOfSong').innerText = "Levels";
 	count++;
 	if(count>a.length-1)
-		count == 0;
+		count = 0;
+
 }
 }
 

@@ -6,7 +6,6 @@ printQ=false;
 fistBumpActivate=false;
 fisting=false;
 fistingValue=0;
-
 function wait(seconds)
   local start = myo.getTimeMilliseconds()
   repeat until myo.getTimeMilliseconds() > start + seconds
@@ -20,7 +19,7 @@ function onPoseEdge(pose, edge)
 			unlocked=false
 		end
 		if pose=="thumbToPinky" then
-			myo.keyboard("s", "press")
+			myo.keyboard("t", "press")
 			unlocked=false
 		end
 	end
